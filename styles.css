@@ -1,0 +1,641 @@
+/* URLGuard Extension Styles */
+
+/* Global styles */
+:root {
+  --color-safe: #4CAF50;
+  --color-suspicious: #FFC107;
+  --color-high-risk: #F44336;
+  --color-phishing: #F44336;
+  --color-bg: #ffffff;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-border: #e1e1e1;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --transition-quick: 0.15s ease;
+}
+
+/* Warning banner styles */
+#urlguard-warning-banner {
+  font-family: var(--font-family);
+}
+
+/* Extension popup styles */
+.urlguard-popup {
+  width: 360px;
+  min-height: 400px;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+.urlguard-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: #f8f8f8;
+}
+
+.urlguard-logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: auto;
+}
+
+.urlguard-logo svg {
+  margin-right: 8px;
+}
+
+.urlguard-creator {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--color-text-secondary);
+  margin-left: 8px;
+}
+
+.urlguard-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.urlguard-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--color-bg);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition-quick);
+  color: var(--color-text-secondary);
+}
+
+.urlguard-tab:hover {
+  background-color: #f5f5f5;
+}
+
+.urlguard-tab.active {
+  color: var(--color-text);
+  border-bottom: 2px solid #2196F3;
+}
+
+.urlguard-content {
+  padding: 16px;
+}
+
+.urlguard-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  margin-bottom: 16px;
+  border-radius: var(--radius-medium);
+  transition: var(--transition-quick);
+}
+
+.urlguard-status-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.urlguard-status-text {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.urlguard-status-desc {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.urlguard-status-score {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.urlguard-score-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.urlguard-score-bar {
+  height: 6px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.urlguard-score-value {
+  height: 100%;
+  transition: var(--transition-quick);
+}
+
+.urlguard-button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-quick);
+  text-align: center;
+  text-decoration: none;
+}
+
+.urlguard-button-primary {
+  background-color: #2196F3;
+  color: white;
+}
+
+.urlguard-button-primary:hover {
+  background-color: #1976D2;
+}
+
+.urlguard-button-outline {
+  background-color: transparent;
+  border: 1px solid #2196F3;
+  color: #2196F3;
+}
+
+.urlguard-button-outline:hover {
+  background-color: #f0f7fd;
+}
+
+.urlguard-button-danger {
+  background-color: var(--color-phishing);
+  color: white;
+}
+
+.urlguard-button-danger:hover {
+  background-color: #d32f2f;
+}
+
+.urlguard-settings-group {
+  margin-bottom: 20px;
+}
+
+.urlguard-settings-title {
+  font-weight: 500;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.urlguard-history-subtitle {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+  font-weight: normal;
+}
+
+.urlguard-setting {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.urlguard-setting-label {
+  margin-left: 8px;
+  flex: 1;
+}
+
+.urlguard-api-key {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  margin-bottom: 16px;
+  font-family: var(--font-family);
+}
+
+.urlguard-history-item {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-quick);
+}
+
+.urlguard-history-item:hover {
+  background-color: #f5f5f5;
+}
+
+.urlguard-history-status {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.urlguard-history-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.urlguard-history-url {
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.urlguard-history-date {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+.urlguard-history-score {
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.urlguard-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  margin-bottom: 12px;
+}
+
+.urlguard-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.urlguard-list-item:last-child {
+  border-bottom: none;
+}
+
+.urlguard-list-item-remove {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.urlguard-list-item-remove:hover {
+  color: var(--color-phishing);
+}
+
+.urlguard-link {
+  color: #2196F3;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.urlguard-link:hover {
+  text-decoration: underline;
+}
+
+.urlguard-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--color-text-secondary);
+}
+
+.urlguard-empty svg {
+  margin-bottom: 12px;
+  color: #ccc;
+}
+
+/* Status colors */
+.urlguard-status.safe {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.urlguard-status.suspicious {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.urlguard-status.high-risk {
+  background-color: rgba(255, 152, 0, 0.1);
+}
+
+.urlguard-status.phishing {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.urlguard-status-icon.safe {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: var(--color-safe);
+}
+
+.urlguard-status-icon.suspicious {
+  background-color: rgba(255, 193, 7, 0.2);
+  color: var(--color-suspicious);
+}
+
+.urlguard-status-icon.high-risk {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: var(--color-high-risk);
+}
+
+.urlguard-status-icon.phishing {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: var(--color-phishing);
+}
+
+.urlguard-score-value.safe {
+  background-color: var(--color-safe);
+}
+
+.urlguard-score-value.suspicious {
+  background-color: var(--color-suspicious);
+}
+
+.urlguard-score-value.high-risk {
+  background-color: var(--color-high-risk);
+}
+
+.urlguard-score-value.phishing {
+  background-color: var(--color-phishing);
+}
+
+.urlguard-history-status.safe {
+  background-color: var(--color-safe);
+}
+
+.urlguard-history-status.suspicious {
+  background-color: var(--color-suspicious);
+}
+
+.urlguard-history-status.high-risk {
+  background-color: var(--color-high-risk);
+}
+
+.urlguard-history-status.phishing {
+  background-color: var(--color-phishing);
+}
+
+/* Animations */
+@keyframes urlguard-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.urlguard-fade-in {
+  animation: urlguard-fade-in 0.3s ease-out;
+}
+
+/* Toggle switch for settings */
+.urlguard-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.urlguard-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.urlguard-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: var(--transition-quick);
+}
+
+.urlguard-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: var(--transition-quick);
+}
+
+.urlguard-toggle input:checked + .urlguard-toggle-slider {
+  background-color: #2196F3;
+}
+
+.urlguard-toggle input:checked + .urlguard-toggle-slider:before {
+  transform: translateX(16px);
+}
+
+/* Online Search Styles */
+.urlguard-button-secondary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.urlguard-button-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.urlguard-button-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.urlguard-search-results {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.urlguard-search-status {
+  text-align: center;
+  padding: 20px;
+}
+
+.urlguard-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.urlguard-loading svg {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.urlguard-search-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.urlguard-search-summary {
+  margin-bottom: 16px;
+}
+
+.urlguard-search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.urlguard-search-header h4 {
+  margin: 0;
+  color: #212529;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.urlguard-search-confidence {
+  background: #e9ecef;
+  color: #6c757d;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.urlguard-search-verdict {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.urlguard-search-verdict.legitimate {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.urlguard-search-verdict.suspicious {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.urlguard-search-details h5 {
+  margin: 16px 0 8px 0;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.urlguard-search-details p {
+  margin: 0 0 12px 0;
+  color: #495057;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.urlguard-search-details ul {
+  margin: 0 0 12px 0;
+  padding-left: 20px;
+}
+
+.urlguard-search-details li {
+  color: #495057;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.urlguard-search-error {
+  text-align: center;
+  padding: 20px;
+  color: #dc3545;
+}
+
+.urlguard-search-error svg {
+  margin-bottom: 8px;
+}
+
+.urlguard-search-error p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Online Search History Styles */
+.urlguard-history-item.online-search {
+  border-left: 3px solid #667eea;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, transparent 50%);
+}
+
+.urlguard-history-legitimacy {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.urlguard-history-item.online-search .urlguard-history-score {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.urlguard-history-item.online-search .urlguard-history-url {
+  display: flex;
+  align-items: center;
+}
+
+.urlguard-history-item.online-search .urlguard-history-url svg {
+  opacity: 0.7;
+  color: #667eea;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .urlguard-popup {
+    width: 320px;
+  }
+} 

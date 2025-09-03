@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URLGuard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="urlguard-popup">
+    <!-- Header with logo -->
+    <div class="urlguard-header">
+      <div class="urlguard-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        URLGuard
+        <span class="urlguard-creator">Created by: Hiu Kai Zhi</span>
+      </div>
+    </div>
+    
+    <!-- Navigation tabs -->
+    <div class="urlguard-tabs">
+      <button class="urlguard-tab active" data-tab="status">Status</button>
+      <button class="urlguard-tab" data-tab="history">History</button>
+      <button class="urlguard-tab" data-tab="settings">Settings</button>
+    </div>
+    
+    <!-- Content area -->
+    <div class="urlguard-content">
+      <!-- Status tab content -->
+      <div class="urlguard-tab-content active" id="status-tab">
+        <div class="urlguard-status safe">
+          <div class="urlguard-status-icon safe">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="urlguard-status-text">Current URL is Safe</div>
+          <div class="urlguard-status-desc">No security threats detected on this website.</div>
+          
+          <div class="urlguard-status-score">
+            <div class="urlguard-score-labels">
+              <span id="score-value">Threat Score: 0/100</span>
+              <span>Safe</span>
+              <span>Dangerous</span>
+            </div>
+            <div class="urlguard-score-bar">
+              <div class="urlguard-score-value safe" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="urlguard-current-url">
+          <div class="urlguard-settings-title">Current URL</div>
+          <div id="current-url" style="word-break: break-all; margin-bottom: 16px; font-size: 14px;">
+            https://example.com
+          </div>
+        </div>
+        
+        <div class="urlguard-actions" style="display: flex; gap: 8px;">
+          <button id="analyze-btn" class="urlguard-button urlguard-button-primary" style="flex: 1;">
+            Analyze Again
+          </button>
+          <button id="online-search-btn" class="urlguard-button urlguard-button-secondary" style="flex: 1;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            Online Search
+          </button>
+        </div>
+        
+        <div class="urlguard-actions" style="display: flex; gap: 8px; margin-top: 8px;">
+          <button id="whitelist-btn" class="urlguard-button urlguard-button-outline" style="flex: 1;">
+            Add to Whitelist
+          </button>
+        </div>
+        
+        <!-- Online Search Results -->
+        <div id="online-search-results" class="urlguard-search-results" style="display: none;">
+          <div class="urlguard-settings-title">Online Search Results</div>
+          <div id="search-status" class="urlguard-search-status">
+            <div class="urlguard-loading">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="2" x2="12" y2="6"></line>
+                <line x1="12" y1="18" x2="12" y2="22"></line>
+                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                <line x1="2" y1="12" x2="6" y2="12"></line>
+                <line x1="18" y1="12" x2="22" y2="12"></line>
+                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+              </svg>
+              Searching online for information...
+            </div>
+          </div>
+          <div id="search-content" class="urlguard-search-content" style="display: none;">
+            <!-- Search results will be populated here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- History tab content -->
+      <div class="urlguard-tab-content" id="history-tab" style="display: none;">
+        <div class="urlguard-settings-title" style="display: flex; justify-content: space-between; align-items: center;">
+          Recent Analyses
+          <button id="clear-history" class="urlguard-link" style="font-size: 14px; font-weight: normal;">
+            Clear All
+          </button>
+        </div>
+        <div class="urlguard-history-subtitle">
+          Regular URL Analysis: Threat Score<br>
+          Online Search Analysis: Confidence Level (%)
+        </div>
+        
+        <div id="history-list">
+          <!-- History items will be added here dynamically -->
+          <div class="urlguard-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p>No history yet</p>
+            <p style="font-size: 14px;">URL analysis history will appear here</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Settings tab content -->
+      <div class="urlguard-tab-content" id="settings-tab" style="display: none;">
+        <!-- API Configuration -->
+        <div class="urlguard-settings-group">
+          <div class="urlguard-settings-title">API Configuration</div>
+          <p style="font-size: 12px; color: #666; margin-bottom: 12px;">
+            Configure your API keys to enable AI-powered URL analysis. Keys are stored locally and never shared.
+          </p>
+          
+          <div class="urlguard-setting">
+            <label for="deepseek-api-key" class="urlguard-setting-label">DeepSeek API Key (for URL analysis):</label>
+            <input type="password" id="deepseek-api-key" class="urlguard-api-key" placeholder="sk-...">
+          </div>
+          
+          <div class="urlguard-setting">
+            <label for="openai-api-key" class="urlguard-setting-label">OpenAI API Key (for online search):</label>
+            <input type="password" id="openai-api-key" class="urlguard-api-key" placeholder="sk-...">
+          </div>
+        </div>
+        
+        <!-- General Settings -->
+        <div class="urlguard-settings-group">
+          <div class="urlguard-settings-title">General Settings</div>
+          
+          <div class="urlguard-setting">
+            <label class="urlguard-toggle">
+              <input type="checkbox" id="enable-monitoring" checked>
+              <span class="urlguard-toggle-slider"></span>
+            </label>
+            <span class="urlguard-setting-label">Enable real-time URL monitoring</span>
+          </div>
+          
+          <div class="urlguard-setting">
+            <label class="urlguard-toggle">
+              <input type="checkbox" id="show-notifications" checked>
+              <span class="urlguard-toggle-slider"></span>
+            </label>
+            <span class="urlguard-setting-label">Show notifications for threats</span>
+          </div>
+          
+          <div class="urlguard-setting">
+            <label class="urlguard-toggle">
+              <input type="checkbox" id="store-history">
+              <span class="urlguard-toggle-slider"></span>
+            </label>
+            <span class="urlguard-setting-label">Store analysis history</span>
+          </div>
+        </div>
+        
+        <!-- Whitelist Management -->
+        <div class="urlguard-settings-group">
+          <div class="urlguard-settings-title" style="display: flex; justify-content: space-between; align-items: center;">
+            Whitelisted Domains
+            <button id="add-whitelist" class="urlguard-link" style="font-size: 14px; font-weight: normal;">
+              Add Domain
+            </button>
+          </div>
+          
+          <div id="whitelist" class="urlguard-list">
+            <!-- Whitelisted domains will be added here dynamically -->
+            <div class="urlguard-empty">No whitelisted domains</div>
+          </div>
+        </div>
+        
+        <!-- Blacklist Management -->
+        <div class="urlguard-settings-group">
+          <div class="urlguard-settings-title" style="display: flex; justify-content: space-between; align-items: center;">
+            Blacklisted Domains
+            <button id="add-blacklist" class="urlguard-link" style="font-size: 14px; font-weight: normal;">
+              Add Domain
+            </button>
+          </div>
+          
+          <div id="blacklist" class="urlguard-list">
+            <!-- Blacklisted domains will be added here dynamically -->
+            <div class="urlguard-empty">No blacklisted domains</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 
